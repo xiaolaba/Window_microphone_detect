@@ -1,0 +1,34 @@
+# Storage : C:\MinGW\msys\1.0\home\user0\mic_detect
+
+# Compiler for C++
+CXX = g++
+
+# Compiler flags
+CXXFLAGS = -Wall -O2
+
+# Linker flags (to link the winmm library)
+LDFLAGS = -lwinmm
+
+# Target executable
+TARGET = microphone_detect.exe
+
+# Source files
+SRCS = microphone_detect.cpp
+
+# Object files
+OBJS = $(SRCS:.cpp=.o)
+
+# Default rule
+all: $(TARGET)
+
+# Rule to create the executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Rule to compile .cpp files into .o files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean rule
+clean:
+	rm -f $(OBJS) $(TARGET)
